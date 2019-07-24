@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device=width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Delierit Courier Service</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
+        <script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="logo">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <h1><a href="{{ url_for('main.index') }}"><img src="{{ url_for('static', filename = 'img/ddk.png') }}" alt="img" style="width:150px;height:150px; padding-left:15%;"></a></h1>
+        </div>
+               
+                <div class="nav_w3ls">
+                    <nav>
+                        <input type="checkbox" id="drop" />
+                        <ul class="menu">
+                            <li><a href="{{ url_for('main.index') }}" class="active">Home</a></li>
+                            <li><a href="{{ url_for('auth.login') }}">login</a></li>
+                            <li><a href="{{ url_for('auth.logout') }}">logout</a></li>
+                            <li><div class="ddown">
+                                <button class="dbtn">My Order 
+                                  <i class="fa fa-caret-down"></i>
+                                </button>
+                                <div class="ddown-content">
+                                  <a href="{{ url_for('main.order') }}">Place order</a>
+                                  <a href="{{ url_for('main.cancelorder') }}">Cancel order</a>
+                                  <a href="{{ url_for('main.user_change') }}">Check order status</a>
+                                  <a href="{{ url_for('main.status') }}">Change destination</a>
+                                </div>
+                              </div> </li> 
+                            
+                            <li><a href="{{ url_for('main.contactform') }}">Contact Us</a></li>
+                        </ul>
+                    </nav>
+                </div>
+    </body>
+</html>
+{% block content %}
+
+{% endblock %}
