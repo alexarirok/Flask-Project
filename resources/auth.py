@@ -6,8 +6,8 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['POST', 'GET'])
 def login():
-    user = User.query.all()
-    if request.user.is_authenticated():
+    user = request.form.get("email")
+    if user.is_authenticated:
         return redirect(url_for('main.index'))
     form = LoginForm()
     if form.validate_on_submit():
