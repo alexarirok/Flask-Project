@@ -1,14 +1,31 @@
 {% extends 'base.html' %}
+
 {% block content %}
-  
-      <div class="logon">
-        <h3 style="text-align: center">Login Form</h3>
-        <form action="index.html" method="POST">
+
+<div class="logon">
+  <h3 style="text-align: center">Login Form</h3>
+  <form action="index.html" method="POST">
+      
+    
+      <div class="container" style="width: 40%; margin-left:32%">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+    
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
             
-          
-            <div class="container" style="width: 40%; margin-left:32%">
-              {{ form }}
-          </form>
-        </div>
+        <button type="submit">Login</button>
+        <label>
+          <input type="checkbox" checked="unchecked" name="remember"> Remember me
+        </label>
+        <span class="psw"><a href="\signup">Create Account</a></span>
+      </div>
+    
+      <div class="container" style="width: 40%; margin-left:32% ">
+        <button type="button" class="cancelbtn">Cancel</button>
+        <span class="psw"><a href="#">Forgot password?</a></span>
+      </div>
+    </form>
+  </div>
         
 {% endblock %}
