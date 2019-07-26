@@ -1,5 +1,7 @@
-from flask_marshmallow import Marshmallow
-from flask_sqlalchemy import SQLAlchemy
+# from flask_marshmallow import Marshmallow
+# from flask_sqlalchemy import SQLAlchemy
+# from flask import Flask 
 
-ma = Marshmallow()
-db = SQLAlchemy()
+# app = Flask(__name__)
+# ma = Marshmallow()
+# db = SQLAlchemy(app)

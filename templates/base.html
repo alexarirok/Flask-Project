@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
         <script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">    
     </head>
     <body>
         <div id="logo">
@@ -22,6 +23,7 @@
                         <ul class="menu">
                             <li><a href="{{ url_for('main.index') }}" class="active">Home</a></li>
                             <li><a href="{{ url_for('auth.login') }}">login</a></li>
+                            <li><a href="{{ url_for('auth.signup') }}">signup</a></li>
                             <li><a href="{{ url_for('auth.logout') }}">logout</a></li>
                             <li><div class="ddown">
                                 <button class="dbtn">My Order 
@@ -38,6 +40,18 @@
                             <li><a href="{{ url_for('main.contactform') }}">Contact Us</a></li>
                         </ul>
                     </nav>
+                </div>
+                <div class="col-md-8">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
                 </div>
     </body>
 </html>

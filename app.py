@@ -2,47 +2,23 @@
 from flask import Flask, render_template, Blueprint
 from flask_restful import Api
 from resources.Hello import Hello 
+from flask_sqlalchemy import SQLAlchemy 
+from flask_login import LoginManager 
+from flask_bcrypt import Bcrypt
 
 api_bp = Blueprint('api', __name__)
 api = Api(api_bp)
+
 api.add_resource(Hello, '/Hello')
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return render_template("index.html")
+app.config['SECRET_KEY'] = 'os.urandom(32)'
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://alex:postgres@localhost/data"
+bcrypt = Bcrypt(app)
 
-@app.route('/login')
-def login():
-    return render_template("login.html")
+db = SQLAlchemy(app)
+login_manager = LoginManager(app)
 
-@app.route('/user_change')
-def user_change():
-    return render_template("user_change.html")
-
-@app.route('/cancelorder')
-def cancelorder():
-    return render_template("cancelorder.html")
-
-@app.route('/contactform')
-def contactform():
-    return render_template("contactform.html")
-
-@app.route('/order')
-def order():
-    return render_template("order.html")
-
-@app.route('/signup')
-def signup():
-    return render_template("signup.html")
-
-@app.route('/status')
-def status():
-    return render_template("status.html")
-
-
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)

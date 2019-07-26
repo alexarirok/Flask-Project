@@ -1,25 +1,26 @@
-from db import db    
+from app import db, login_manager  
+from flask_login import UserMixin  
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get((user_id))
 
-class User(db.Model):
-    __tablename__ = "users"
+class User(db.Model, UserMixin):
+    __tablename__ = "user"
     id = db.Column(db.Integer, primary_key = True)
     email = db.Column(db.String(100), unique = True)
     password = db.Column(db.String(100))
 
-    def __init__(self, email, password):
-        self.email = email
-        self.password = password
 
     def __repr__(self):
-        return f"{self.username}"
+        return f"{self.email}"
 
     def self_to_db(self):
         db.session.add(self)
         db.session.commit()
 
 class Parcel(db.Model):
-    __tablename__ = "parcels"
+    __tablename__ = "parcel"
     id = db.Column(db.Integer, primary_key = True)
     parcel_name = db.Column(db.String(100))
     parcel_number = db.Column(db.String(100), unique = True)
