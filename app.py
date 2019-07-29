@@ -13,8 +13,8 @@ api.add_resource(Hello, '/Hello')
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'os.urandom(32)'
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://alex:postgres@localhost/data"
+app.config['SECRET_KEY'] = 'helloworld'
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://alex:postgres@localhost/store"
 bcrypt = Bcrypt(app)
 
 db = SQLAlchemy(app)

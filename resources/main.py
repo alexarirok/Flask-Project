@@ -1,4 +1,7 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, request, flash, url_for
+from .form import OrderForm
+from models import Order
+from app import db
 
 main = Blueprint('main', __name__)
 
@@ -19,9 +22,18 @@ def cancelorder():
 def contactform():
     return render_template("contactform.html")
 
-@main.route('/order')
+@main.route('/order', methods=['POST', 'GET'])
 def order():
-    return render_template("order.html")
+    form = OrderForm(request.form)
+    if request.method == 'POST':
+        parcel_name = request.form.get('parcel_name')
+        parcel_number = request.form.get('parcel_number')
+        order = Order(parcel_name=form.parcel_name.data, parcel_number=form.parcel_number.data)
+        db.session.add(order)
+        db.session.commit()
+        flash(f"Parcel ordered succesfully")
+        return redirect(url_for('main.order'))
+    return render_template('order.html', form=form)
 
 
 @main.route('/status')
