@@ -13,11 +13,9 @@ def login():
         return redirect(url_for('main.index'))
     form = LoginForm()
     if form.validate_on_submit():
-        print("error")
         user = User.query.filter_by(email=form.email.data).first() 
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
+        if user:# and bcrypt.check_password_hash(form.password.data, user.password):
             login_user(user, remember=form.remember.data)
-            #print ("Hi")
             return redirect(url_for('main.index'))
         else:
             flash('Login unsuccessfully, Please check your email and password', 'danger')
@@ -31,7 +29,7 @@ def signup():
     form = SignupForm(request.form)
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data)
-        user = User(email=form.email.data, password=form.password.data)
+        user = User(email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
         flash(f"Thanks for sining up {form.email.data}", "success")

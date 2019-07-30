@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="mx-3 col-md-6">
+      <div class="content-section">
+         <table border="1px">
+            <tr>
+                <th >Parcel Name</th>
+                <th>Parcel Number</th>
+            </tr>
+            {% for o in order %}
+         <tr>
+             <td>{{ o.parcel_name }}</td>
+             <td>{{ o.parcel_number }}</td>
+         </tr>
+         {% endfor %}
+        </table>    
+          
+         
+    </div>
+    </div>
+</div>  
+{% endblock %}

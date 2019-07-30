@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, redirect, request, flash, url_for
-from .form import OrderForm
+from .form import OrderForm, ContactForm
 from models import Order
+from flask_mail import Message, Mail
 from app import db
 
 main = Blueprint('main', __name__)
@@ -18,9 +19,24 @@ def user_change():
 def cancelorder():
     return render_template("cancelorder.html")
 
-@main.route('/contactform')
+@main.route('/contactform', methods=['POST', 'GET'])
 def contactform():
-    return render_template("contactform.html")
+    form = ContactForm(request.form)
+
+    if request.method == 'POST':
+        if form.validate() == False:
+            flash(f"All fields are required.")
+            return render_template('contactform.html', form=form)
+        else:
+            msg = Message(subject=form.subject.data, sender=form.email.data, recipients=["akorir233@gmail.com"])
+            msg.body = "Thanks your message has been recieved. We will get back to you shortly"
+            # (form.name.data, form.email.data, form.message.data)
+            # mail.send(msg)
+            
+
+            return redirect(url_for("main.index"))
+    elif request.method == 'GET':
+        return render_template("contactform.html", form=form)
 
 @main.route('/order', methods=['POST', 'GET'])
 def order():
@@ -36,6 +52,12 @@ def order():
     return render_template('order.html', form=form)
 
 
-@main.route('/status')
+@main.route('/orders', methods=['GET'])
+def orders():
+    if request.method == 'GET':
+        order = Order.query.all()
+    return render_template('order_items.html', order=order)
+
+@main.route('/items')
 def status():
     return render_template("status.html")

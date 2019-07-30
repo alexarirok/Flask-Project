@@ -11,7 +11,7 @@ class LoginForm(FlaskForm):
 
 class SignupForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email(), Length(min=4, max=40)])
-    password = PasswordField('Password', validators=[DataRequired(), Length(min=4)])
+    password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
 
     submit = SubmitField('Sign Up')
@@ -28,18 +28,15 @@ class OrderForm(FlaskForm):
 
     submit = SubmitField('Place Order')
 
-    def validate_parcel(self, order):
-        order = Order.query.filter_by(parcel=parcel.data).first()
+    # def validate_parcel(self, order):
+    #     order = Order.query.filter_by(parcel=parcel.data).first()
 
 class ContactForm(FlaskForm):
-    first_name = StringField('First_Name', validators=[DataRequired()])
-    last_name = StringField('Last_Name', validators=[DataRequired()])
+    name = StringField('Name', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email(), Length(min=2, max=100)])
     subject = TextField('Subject', validators=[DataRequired])
     message = TextField('Message', validators=[DataRequired])
     submit = SubmitField('Send')
 
-    def validate_parcel(self, order):
-        order = Order.query.filter_by(parcel=parcel.data).first()
-       
+    
        

@@ -22,9 +22,12 @@
                         <input type="checkbox" id="drop" />
                         <ul class="menu">
                             <li><a href="{{ url_for('main.index') }}" class="active">Home</a></li>
+                            {% if current_user.is_authenticated %}
+                            <li><a href="{{ url_for('auth.logout') }}">logout</a></li>
+                            {% else %}
                             <li><a href="{{ url_for('auth.login') }}">login</a></li>
                             <li><a href="{{ url_for('auth.signup') }}">signup</a></li>
-                            <li><a href="{{ url_for('auth.logout') }}">logout</a></li>
+                            {% endif %}
                             <li><div class="ddown">
                                 <button class="dbtn">My Order 
                                   <i class="fa fa-caret-down"></i>
